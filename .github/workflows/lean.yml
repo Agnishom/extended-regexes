@@ -29,11 +29,11 @@ jobs:
       with:
         path: .lake
         key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('lake-manifest.json') }}-${{ hashFiles('lean-toolchain') }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('lake-manifest.json') }}-
-            ${{ runner.os }}-build-${{ env.cache-name }}-
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
+        restore-keys: |
+          ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('lake-manifest.json') }}-
+          ${{ runner.os }}-build-${{ env.cache-name }}-
+          ${{ runner.os }}-build-
+          ${{ runner.os }}-
     
     - name: Setup lean
       uses: Julian/setup-lean@v1
