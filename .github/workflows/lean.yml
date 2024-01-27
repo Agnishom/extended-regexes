@@ -19,6 +19,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - uses: Julian/setup-lean@v1
+    - uses: actions/checkout@v4
+
+    - name: Cache Lean Packages
+      id: cache-lean
+      uses: actions/cache@v3
+      env:
+        cache-name: cache-lean-packages
+      with:
+        path: .lake
+        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('lake-manifest.json') }}-${{ hashFiles('lean-toolchain') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('lake-manifest.json') }}-
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+    
+    - name: Setup lean
+      uses: Julian/setup-lean@v1
+      
     - run: lake build
