@@ -1,0 +1,24 @@
+name: Lean CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+  
+    defaults:
+      run:
+        working-directory: ./lean
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-lean@v1
+    - run: lake build
