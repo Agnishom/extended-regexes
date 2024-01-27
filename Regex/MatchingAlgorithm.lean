@@ -45,7 +45,7 @@ termination_by
 def null?_split_as_loc {r : RE α} {x : Loc σ} {sp_out : Span σ}
   (matching : null? r x = some sp_out) : sp_out.beg = x := by
   unfold null? at matching
-  by_cases null r x
+  by_cases h : null r x
   . simp at h;
     rw[h] at matching; simp at matching;
     subst matching;
@@ -58,14 +58,14 @@ def null?_split_as_loc {r : RE α} {x : Loc σ} {sp_out : Span σ}
 def maxMatchEnd_split_as_loc {r : RE α} {x : Loc σ} {sp_out : Span σ}
   (matching : maxMatchEnd r x = some sp_out) : sp_out.beg = x := by
   match x with
-  | ⟨_,[]⟩ => simp at matching; exact null?_split_as_loc matching
+  | ⟨_,[]⟩ => simp at matching; aesop
   | ⟨a,c::b⟩ =>
     match match_eq:maxMatchEnd (der (r : RE α) ⟨a,c::b⟩).val ⟨c::a,b⟩ with
     | none =>
       unfold maxMatchEnd at matching
       rw[match_eq] at matching;
       simp at matching;
-      exact null?_split_as_loc matching
+      aesop
     | some sp =>
       have ind := maxMatchEnd_split_as_loc match_eq
       unfold maxMatchEnd at matching
@@ -91,7 +91,7 @@ theorem maxMatchEnd_matches {x : Loc σ} {r : RE α} {sp_out : Span σ}
   match x with
   | ⟨a,[]⟩ => by
     simp at matching
-    by_cases null r ⟨a,[]⟩
+    by_cases h : null r ⟨a,[]⟩
     . rw[h] at matching; simp at matching; subst matching; assumption
     . simp at h
       rw[h] at matching
@@ -102,7 +102,7 @@ theorem maxMatchEnd_matches {x : Loc σ} {r : RE α} {sp_out : Span σ}
       unfold maxMatchEnd at matching;
       rw[match_eq] at matching;
       simp at matching;
-      by_cases null r ⟨a,c::b⟩
+      by_cases h :  null r ⟨a,c::b⟩
       . simp at h; rw[h] at matching; simp at matching;
         subst matching;
         simp; assumption
@@ -146,7 +146,7 @@ theorem match_end_start :
   → derivesStartLocation x.reverse sp.reverse :=
   λ h => by
     simp_all
-    match eq1:x with
+    match x with
     | ⟨x1,x2⟩ =>
     match eq2:sp with
     | ⟨sp1,sp2,sp3⟩ =>
@@ -284,15 +284,15 @@ theorem maxMatchEnd_no_match_here {x : Loc σ} {r : RE α}
   ¬(x.as_span ⊢ r) :=
   match x with
   | ⟨xl,[]⟩ => by
-    simp at matching
-    exact matching
+    rename_i inst
+    aesop
   | ⟨xl,xc::xr⟩ => by
     unfold maxMatchEnd at matching
     match hyp:maxMatchEnd (der r (xl, xc :: xr)).val (xc :: xl, xr) with
     | none =>
       rw[hyp] at matching;
       simp at matching
-      exact matching
+      aesop
     | some _ =>
       rw[hyp] at matching;
       simp at matching
@@ -355,7 +355,7 @@ theorem maxMatchEnd_max {r : RE α} {sp_out : Span σ} {x : Loc σ}
   match x_eq:x with
   | ⟨a,[]⟩ =>
     simp at m
-    by_cases null r (a, []) = true
+    by_cases h : null r (a, []) = true
     . rw[h] at m; simp at m; subst m;
       have := match_start_empty_empty lb
       subst this

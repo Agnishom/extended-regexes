@@ -23,9 +23,9 @@ theorem derives_Bot : (sp ⊢ (Pred ⊥ : RE α)) = false :=
     | [] => by simp
     | a::u => by
       simp;
-      by_cases (denote (⊥ : α) a)
-      . simp; simp at h
-      . simp; apply derives_Bot
+      by_cases h : (denote (⊥ : α) a)
+      . simp at h
+      . apply derives_Bot
 termination_by
   derives_Bot sp => sp.2.1
 
@@ -177,7 +177,7 @@ theorem derives_NegLookahead {r : RE α} :
         | ⟨s,[],v⟩ =>
           unfold derives null;
           simp;
-          by_cases (existsMatch r (s, v) = false)
+          by_cases h : (existsMatch r (s, v) = false)
           . assumption
           . simp at h; rw[derives_to_existsMatch] at h; simp at h;
             match h with
@@ -209,7 +209,7 @@ theorem derives_NegLookbehind {r : RE α} :
         | ⟨s,[],v⟩ =>
           unfold derives; unfold null;
           simp;
-          by_cases (existsMatch rʳ (v, s) = false)
+          by_cases h : (existsMatch rʳ (v, s) = false)
           . assumption
           . simp at h; rw [derives_to_existsMatch] at h; simp at h;
             match h with
@@ -343,11 +343,11 @@ theorem derives_Star_contraction {r : RE α} : sp ⊢ r ⬝ r* → sp ⊢ r* :=
   | ⟨s,[],v⟩ => by simp
   | ⟨s,a::u,v⟩ => by
     simp at hyp
-    by_cases (null r (s, a :: (u ++ v)) = true)
+    by_cases h : (null r (s, a :: (u ++ v)) = true)
     . simp_all;
       match derives_Alt.mp hyp with
-      | Or.inl h => simp at h; assumption
-      | Or.inr h => simp at h; assumption
+      | Or.inl h => assumption
+      | Or.inr h => assumption
     . simp at h; rw[h] at hyp; simp at hyp; simp; assumption
 
 /-- This lemma needs to be declared separately in order to correctly capture the inductive step. -/

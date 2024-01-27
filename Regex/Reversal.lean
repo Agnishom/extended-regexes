@@ -27,7 +27,7 @@ theorem models_reversal {R : RE α} {sp : Span σ} :
       | [] => by simp
       | a::us => by
         simp; intro h;
-        have hp : us = [] := by simp[List.length_eq_zero.mp] at *;
+        have hp : us = [] := by
                                 rw [List.length_eq_zero] at h; assumption
         aesop
   | l ⬝ r => by

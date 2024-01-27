@@ -97,79 +97,79 @@ theorem lookaround_height_reverse_RE (r : RE α) :
 theorem lookaround_height_Cat_L :
   lookaround_height l ≤ lookaround_height (l ⬝ r) → der_termination_metric l x 0 < der_termination_metric (l ⬝ r) x 0 :=
   λ h =>
-  by by_cases (lookaround_height l = lookaround_height (l ⬝ r));
+  by by_cases hNew : (lookaround_height l = lookaround_height (l ⬝ r)) ;
      unfold der_termination_metric;
-     rw [h]; apply Prod.Lex.right; apply Prod.Lex.right; apply Prod.Lex.left; simp; linarith;
+     rw [hNew]; apply Prod.Lex.right; apply Prod.Lex.right; apply Prod.Lex.left; simp; linarith;
      have h1 : lookaround_height l < lookaround_height (l ⬝ r) :=
-      Nat.lt_of_le_of_ne (by assumption) h;
+      Nat.lt_of_le_of_ne (by assumption) hNew;
      apply Prod.Lex.left; exact h1
 
 @[simp]
 theorem lookaround_height_Cat_R :
   lookaround_height r ≤ lookaround_height (l ⬝ r) → der_termination_metric r x 0 < der_termination_metric (l ⬝ r) x 0 :=
   λ h =>
-  by by_cases (lookaround_height r = lookaround_height (l ⬝ r));
+  by by_cases hNew : (lookaround_height r = lookaround_height (l ⬝ r));
      unfold der_termination_metric;
-     rw [h]; apply Prod.Lex.right; apply Prod.Lex.right; apply Prod.Lex.left; simp;
+     rw [hNew]; apply Prod.Lex.right; apply Prod.Lex.right; apply Prod.Lex.left; simp;
      have h1 : lookaround_height r < lookaround_height (l ⬝ r) :=
-      Nat.lt_of_le_of_ne (by assumption) h;
+      Nat.lt_of_le_of_ne (by assumption) hNew;
      apply Prod.Lex.left; exact h1
 
 @[simp]
 theorem lookaround_height_Alt_L :
   lookaround_height l ≤ lookaround_height (l ⋓ r) → der_termination_metric l x 0 < der_termination_metric (l ⋓ r) x 0 :=
   λ h =>
-  by by_cases (lookaround_height l = lookaround_height (l ⋓ r));
+  by by_cases hNew : (lookaround_height l = lookaround_height (l ⋓ r));
      unfold der_termination_metric;
-     rw [h]; apply Prod.Lex.right; apply Prod.Lex.right; apply Prod.Lex.left; simp; linarith;
+     rw [hNew]; apply Prod.Lex.right; apply Prod.Lex.right; apply Prod.Lex.left; simp; linarith;
      have h1 : lookaround_height l < lookaround_height (l ⬝ r) :=
-      Nat.lt_of_le_of_ne (by assumption) h;
+      Nat.lt_of_le_of_ne (by assumption) hNew;
      apply Prod.Lex.left; exact h1
 
 @[simp]
 theorem lookaround_height_Alt_R :
   lookaround_height r ≤ lookaround_height (l ⋓ r) → der_termination_metric r x 0 < der_termination_metric (l ⋓ r) x 0 :=
   λ h =>
-  by by_cases (lookaround_height r = lookaround_height (l ⋓ r));
+  by by_cases hNew : (lookaround_height r = lookaround_height (l ⋓ r));
      unfold der_termination_metric;
-     rw [h]; apply Prod.Lex.right; apply Prod.Lex.right; apply Prod.Lex.left; simp;
+     rw [hNew]; apply Prod.Lex.right; apply Prod.Lex.right; apply Prod.Lex.left; simp;
      have h1 : lookaround_height r < lookaround_height (l ⬝ r) :=
-      Nat.lt_of_le_of_ne (by assumption) h;
+      Nat.lt_of_le_of_ne (by assumption) hNew;
      apply Prod.Lex.left; exact h1
 
 @[simp]
 theorem lookaround_height_Inter_L :
   lookaround_height l ≤ lookaround_height (l ⋒ r) → der_termination_metric l x 0 < der_termination_metric (l ⋒ r) x 0 :=
   λ h =>
-  by by_cases (lookaround_height l = lookaround_height (l ⋒ r));
+  by by_cases hNew : (lookaround_height l = lookaround_height (l ⋒ r));
      unfold der_termination_metric;
-     rw [h]; apply Prod.Lex.right; apply Prod.Lex.right; apply Prod.Lex.left; simp; linarith;
+     rw [hNew]; apply Prod.Lex.right; apply Prod.Lex.right; apply Prod.Lex.left; simp; linarith;
      have h1 : lookaround_height l < lookaround_height (l ⬝ r) :=
-      Nat.lt_of_le_of_ne (by assumption) h;
+      Nat.lt_of_le_of_ne (by assumption) hNew;
      apply Prod.Lex.left; exact h1
 
 @[simp]
 theorem lookaround_height_Inter_R :
   lookaround_height r ≤ lookaround_height (l ⋒ r) → der_termination_metric r x 0 < der_termination_metric (l ⋒ r) x 0 :=
   λ h =>
-  by by_cases (lookaround_height r = lookaround_height (l ⋒ r));
+  by by_cases hNew : (lookaround_height r = lookaround_height (l ⋒ r));
      unfold der_termination_metric;
-     rw [h]; apply Prod.Lex.right; apply Prod.Lex.right; apply Prod.Lex.left; simp;
+     rw [hNew]; apply Prod.Lex.right; apply Prod.Lex.right; apply Prod.Lex.left; simp;
      have h1 : lookaround_height r < lookaround_height (l ⬝ r) :=
-      Nat.lt_of_le_of_ne (by assumption) h;
+      Nat.lt_of_le_of_ne (by assumption) hNew;
      apply Prod.Lex.left; exact h1
 
 @[simp]
 theorem der_termination_metric_Star :
   der_termination_metric r x 0 < der_termination_metric (r *) x 0 :=
   by apply Prod.Lex.right; apply Prod.Lex.right; apply Prod.Lex.left;
-     simp only [sizeOf_RE, lt_add_iff_pos_left]
+     simp [sizeOf_RE, lt_add_iff_pos_left]
 
 @[simp]
 theorem der_termination_metric_Negation :
   der_termination_metric r x 0 < der_termination_metric (~ r) x 0 :=
   by apply Prod.Lex.right; apply Prod.Lex.right; apply Prod.Lex.left;
-     simp only [sizeOf_RE, lt_add_iff_pos_left]
+     simp [sizeOf_RE, lt_add_iff_pos_left]
 
 @[simp]
 theorem der_termination_metric_Lookahead :
@@ -220,10 +220,10 @@ theorem star_metric_Cat_l : (star_metric l) < (star_metric (l ⬝ r)) := by
   split
   . have g : (star_metric l).fst ≤ (star_metric r).fst := by assumption;
     simp only at g;
-    by_cases ((star_metric l).fst = (star_metric r).fst)
-    . rewrite[←h]; exact Prod.Lex.right _ (by linarith);
+    by_cases hNew  : ((star_metric l).fst = (star_metric r).fst)
+    . rewrite[←hNew]; exact Prod.Lex.right _ (by linarith);
     . simp only at *;
-      exact Prod.Lex.left _ _ (Nat.lt_of_le_of_ne g h);
+      exact Prod.Lex.left _ _ (Nat.lt_of_le_of_ne g hNew);
   . have g : ¬(star_metric l).fst ≤ (star_metric r).fst := by assumption;
     simp only [not_le] at g;
     exact Prod.Lex.right _ (by linarith)
@@ -235,7 +235,7 @@ theorem star_metric_Alt_l : star_metric l < star_metric (l ⋓ r) := by
   . simp_rw [g]; simp only [ite_true];
     by_cases g1 : ((star_metric l).fst = (star_metric r).fst)
     . rewrite[←g1]; exact Prod.Lex.right _ (by linarith);
-    . simp only at *; simp only at g1;
+    . simp only at *;
       exact Prod.Lex.left _ _ (Nat.lt_of_le_of_ne g g1);
   . simp_rw [g]; simp only [ite_false];
     simp only [not_le] at g;
@@ -256,9 +256,9 @@ theorem star_metric_Inter_l : star_metric l < star_metric (l ⋒ r) := by
   unfold LT.lt Prod.Lex.instLT max Nat.instMaxNat maxOfLe; simp only;
   split
   . have g : (star_metric l).fst ≤ (star_metric r).fst := by assumption;
-    by_cases ((star_metric l).fst = (star_metric r).fst)
-    . rewrite[←h]; exact Prod.Lex.right _ (by linarith);
-    . simp only at h; exact Prod.Lex.left _ _ (Nat.lt_of_le_of_ne g h);
+    by_cases hNew : ((star_metric l).fst = (star_metric r).fst)
+    . rewrite[←hNew]; exact Prod.Lex.right _ (by linarith);
+    . simp only at hNew; exact Prod.Lex.left _ _ (Nat.lt_of_le_of_ne g hNew);
   . have g : ¬(star_metric l).fst ≤ (star_metric r).fst := by assumption;
     simp only [not_le] at g;
     exact Prod.Lex.right _ (by linarith)
@@ -276,7 +276,7 @@ theorem star_metric_Inter_r : star_metric r < star_metric (l ⋒ r) := by
 
 @[simp]
 theorem star_metric_Negation : star_metric r < star_metric (~ r) := by
-  simp only [star_metric]; apply Prod.Lex.right _ (by simp only [lt_add_iff_pos_left])
+  simp only [star_metric]; apply Prod.Lex.right _ (by simp [lt_add_iff_pos_left])
 
 theorem star_metric_Lookahead : star_metric r < star_metric (?= r) := by
   simp only [star_metric]; apply Prod.Lex.right; simp
@@ -316,7 +316,7 @@ theorem star_metric_NegLookbehind_reverse : star_metric (r ʳ) < star_metric (?<
 theorem star_metric_repeat_first : (star_metric (r ⁽ n ⁾)).fst < 1 + (star_metric r).fst :=
   match n with
   | 0          => by simp[star_metric]
-  | Nat.succ n => by simp only [star_metric, ge_iff_le, max_lt_iff, lt_add_iff_pos_left, true_and];
+  | Nat.succ n => by simp [star_metric, ge_iff_le, max_lt_iff, lt_add_iff_pos_left, true_and];
                      exact (@star_metric_repeat_first _ r n)
 
 @[simp]
@@ -325,9 +325,8 @@ theorem star_metric_repeat : (star_metric (r ⁽ n ⁾)) < (star_metric (r *)) :
 
 @[simp]
 theorem star_metric_Star : (star_metric r) < (star_metric (r *)) := by
-  simp only [star_metric]; apply Prod.Lex.left; simp_all only [lt_add_iff_pos_left]
+  simp only [star_metric]; apply Prod.Lex.left; simp_all [lt_add_iff_pos_left]
 
 @[simp]
 theorem star_metric_cat_Star : star_metric (r ⬝ (r ⁽ m ⁾)) < star_metric (r *) := by
-  simp only [star_metric]; apply Prod.Lex.left; simp_all only [lt_add_iff_pos_left];
-  simp_all only [ge_iff_le, max_lt_iff, lt_add_iff_pos_left, star_metric_repeat_first, and_self]
+  simp only [star_metric]; apply Prod.Lex.left; simp_all  [lt_add_iff_pos_left];

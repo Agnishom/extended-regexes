@@ -1,5 +1,7 @@
 /build
 /lake-packages
+.lake/
+*.olean
 
 ## pdflatex auxiliary files:
 *.aux
