@@ -184,6 +184,10 @@ Components:
 -/
 def Span (σ : Type) := List σ × List σ × List σ
 
+-- toString for spans
+instance [ToString σ] : ToString (Span σ) where
+  toString sp := toString sp.1 ++ " | " ++ toString sp.2.1 ++ " | " ++ toString sp.2.2
+
 /--
 Locations.
 Similarly to spans, the first component is supposed to be reversed.

@@ -54,4 +54,11 @@ def R' : RE (BA Char)  := R₁ ⋒ R₂ ⋒ R₃ ⋒ R₅
 
 #eval llmatch R' "0B:1aD2,e".toList
 
+
+-- write an io action that matches R against the string "abc"
+-- and prints the result to the console
+
+def myMain : IO Unit := do
+  IO.println $ llmatch R "0B:1aD2,e".toList
+
 end examples

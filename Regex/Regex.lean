@@ -8,3 +8,9 @@ import Regex.MatchingAlgorithm
 import Regex.Metrics
 import Regex.Reversal
 import Regex.EliminationNegLookarounds
+
+
+-- | The main function.
+-- use the myMain from Regex.Examples
+
+def main : IO Unit := myMain
